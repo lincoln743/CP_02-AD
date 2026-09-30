@@ -1,0 +1,189 @@
+/* variáveis de cor e fonte pra não ficar repetindo no arquivo todo */
+:root { /* variáveis globais */
+    --fundo: #14110f; /* preto meio marrom, lembra sala de cinema */
+    --fundo-card: #1f1a17; /* um pouco mais claro pro card destacar do fundo */
+    --texto: #f3ece2; /* branco amarelado, cansa menos que branco puro */
+    --texto-fraco: #a89f94; /* cinza pra informações secundárias */
+    --destaque: #e8b04a; /* dourado das luzes de letreiro */
+    --borda: #3a322c; /* cor das bordas finas */
+    --fonte-titulo: "Fraunces", Georgia, serif; /* fonte serifada dos títulos, com reserva se não carregar */
+    --fonte-texto: "Archivo", Arial, sans-serif; /* fonte do texto normal, com reserva */
+} /* fim das variáveis */
+
+* { /* aplica em todos os elementos */
+    margin: 0; /* tira a margem padrão do navegador */
+    padding: 0; /* tira o espaçamento padrão */
+    box-sizing: border-box; /* padding e borda entram na largura, facilita as contas */
+} /* fim do reset */
+
+body { /* corpo da página */
+    background-color: var(--fundo); /* fundo escuro */
+    color: var(--texto); /* cor padrão das letras */
+    font-family: var(--fonte-texto); /* fonte padrão */
+    line-height: 1.5; /* espaço entre linhas pra ler melhor */
+    min-height: 100vh; /* ocupa pelo menos a tela inteira */
+} /* fim do body */
+
+/* ---------- topo ---------- */
+.topo { /* cabeçalho */
+    text-align: center; /* centraliza tudo */
+    padding: 56px 20px 32px; /* espaço em cima, dos lados e embaixo */
+    border-bottom: 1px solid var(--borda); /* linha separando do resto */
+} /* fim do topo */
+
+.sobretitulo { /* linha pequena acima do título */
+    font-size: 0.75rem; /* letra pequena */
+    letter-spacing: 0.25em; /* letras bem espaçadas */
+    text-transform: uppercase; /* tudo maiúsculo */
+    color: var(--destaque); /* dourado */
+} /* fim do sobretitulo */
+
+.titulo { /* título Elenco */
+    font-family: var(--fonte-titulo); /* fonte serifada */
+    font-weight: 800; /* bem grossa */
+    font-size: clamp(3rem, 10vw, 6.5rem); /* cresce com a tela mas tem mínimo e máximo */
+    line-height: 1; /* cola as linhas pra não sobrar espaço */
+    letter-spacing: -0.02em; /* aperta um pouco as letras */
+    margin: 8px 0; /* respiro em cima e embaixo */
+} /* fim do titulo */
+
+.subtitulo { /* frase embaixo do título */
+    color: var(--texto-fraco); /* cinza */
+    font-size: 1rem; /* tamanho normal */
+} /* fim do subtitulo */
+
+/* ---------- conteúdo ---------- */
+.conteudo { /* main */
+    max-width: 1200px; /* não deixa esticar demais em tela grande */
+    margin: 0 auto; /* centraliza na página */
+    padding: 32px 20px 48px; /* espaço interno */
+} /* fim do conteudo */
+
+/* ---------- busca ---------- */
+.busca { /* bloco da busca */
+    max-width: 520px; /* largura máxima do campo */
+    margin: 0 auto 36px; /* centraliza e dá espaço antes do grid */
+} /* fim da busca */
+
+.busca-label { /* texto "Buscar pelo nome" */
+    display: block; /* fica em cima do input */
+    font-size: 0.85rem; /* um pouco menor */
+    color: var(--texto-fraco); /* cinza */
+    margin-bottom: 8px; /* espaço até o input */
+} /* fim do label */
+
+.busca-input { /* campo de texto */
+    width: 100%; /* ocupa a largura toda do bloco */
+    padding: 14px 18px; /* espaço interno pro texto não colar na borda */
+    font-size: 1.05rem; /* letra um pouco maior */
+    font-family: var(--fonte-texto); /* input não herda a fonte sozinho */
+    color: var(--texto); /* cor do que o usuário digita */
+    background-color: var(--fundo-card); /* fundo do campo */
+    border: 1px solid var(--borda); /* borda fina */
+    border-radius: 6px; /* cantos levemente arredondados */
+    outline: none; /* tira a borda azul padrão do navegador */
+    transition: border-color 0.2s; /* anima a troca de cor da borda */
+} /* fim do input */
+
+.busca-input:focus { /* quando o campo está selecionado */
+    border-color: var(--destaque); /* borda fica dourada */
+} /* fim do focus */
+
+.busca-input::placeholder { /* texto de exemplo dentro do campo */
+    color: #6f665e; /* cinza mais escuro */
+} /* fim do placeholder */
+
+.contador { /* texto "x de 75 exibidos" */
+    margin-top: 8px; /* espaço do input */
+    font-size: 0.8rem; /* pequeno */
+    color: var(--texto-fraco); /* cinza */
+    text-align: right; /* alinhado à direita */
+} /* fim do contador */
+
+/* ---------- grid de cards ---------- */
+.grid { /* container dos cards */
+    display: grid; /* usa css grid */
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); /* coloca quantas colunas couberem, cada uma com no mínimo 190px */
+    gap: 24px; /* espaço entre os cards */
+} /* fim do grid */
+
+.card { /* cada card */
+    background-color: var(--fundo-card); /* fundo do card */
+    border: 1px solid var(--borda); /* borda fina */
+    border-radius: 8px; /* cantos arredondados */
+    overflow: hidden; /* corta a foto nos cantos arredondados */
+    transition: transform 0.2s, border-color 0.2s; /* anima o hover */
+} /* fim do card */
+
+.card:hover { /* quando passa o mouse */
+    transform: translateY(-4px); /* sobe um pouquinho */
+    border-color: var(--destaque); /* borda dourada */
+} /* fim do hover */
+
+.card-foto { /* foto do ator */
+    width: 100%; /* ocupa a largura do card */
+    aspect-ratio: 3 / 4; /* formato retrato, igual as fotos do tvmaze */
+    object-fit: cover; /* corta sem distorcer se a foto tiver outro formato */
+    display: block; /* tira o espacinho que fica embaixo de imagem inline */
+    background-color: var(--borda); /* cor que aparece enquanto a foto carrega */
+} /* fim da foto */
+
+.card-info { /* parte de texto do card */
+    padding: 14px 16px 18px; /* espaço interno */
+} /* fim do card-info */
+
+.card-nome { /* nome do ator */
+    font-family: var(--fonte-titulo); /* serifada igual o título */
+    font-weight: 600; /* meio grossa */
+    font-size: 1.15rem; /* um pouco maior que o texto */
+    line-height: 1.2; /* linhas mais juntas se o nome quebrar */
+    margin-bottom: 10px; /* espaço até os dados */
+} /* fim do nome */
+
+.card-dado { /* linhas de país e nascimento */
+    font-size: 0.85rem; /* letra menor */
+    color: var(--texto); /* cor normal */
+} /* fim do dado */
+
+.card-dado span { /* a palavrinha "País" / "Nascimento" */
+    display: block; /* fica em cima do valor */
+    font-size: 0.68rem; /* bem pequena */
+    letter-spacing: 0.12em; /* espaçada */
+    text-transform: uppercase; /* maiúscula */
+    color: var(--destaque); /* dourada */
+    margin-top: 6px; /* separa um dado do outro */
+} /* fim do span */
+
+/* ---------- mensagem sem resultado ---------- */
+.sem-resultado { /* aparece quando o filtro não acha ninguém */
+    display: none; /* começa escondida, o js que mostra */
+    text-align: center; /* centralizada */
+    color: var(--texto-fraco); /* cinza */
+    padding: 40px 0; /* espaço em cima e embaixo */
+} /* fim do sem-resultado */
+
+/* ---------- rodapé ---------- */
+.rodape { /* footer */
+    text-align: center; /* centralizado */
+    padding: 24px 20px; /* espaço interno */
+    border-top: 1px solid var(--borda); /* linha em cima */
+    font-size: 0.85rem; /* letra menor */
+    color: var(--texto-fraco); /* cinza */
+} /* fim do rodape */
+
+.fonte { /* linha dos créditos dos dados */
+    font-size: 0.75rem; /* ainda menor */
+    margin-top: 4px; /* espaço da linha de cima */
+} /* fim da fonte */
+
+/* ---------- celular ---------- */
+@media (max-width: 480px) { /* telas pequenas */
+    .grid { /* grid no celular */
+        grid-template-columns: repeat(2, 1fr); /* força 2 colunas */
+        gap: 14px; /* espaço menor entre cards */
+    } /* fim do grid mobile */
+
+    .card-info { /* texto do card no celular */
+        padding: 10px 12px 14px; /* padding menor */
+    } /* fim do card-info mobile */
+} /* fim do media query */
